@@ -13,11 +13,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StarshipDto {
+public class PlanetProxyDto {
     private String name;
 
-    @JsonProperty("class")
-    private String starshipClass;
-
-    private String model;
+    @JsonProperty("residents")
+    private List<String> residentUrls;
 }

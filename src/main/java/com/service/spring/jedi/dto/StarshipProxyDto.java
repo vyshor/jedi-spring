@@ -5,19 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @author vyshor
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StarshipDto {
+public class StarshipProxyDto {
     private String name;
 
-    @JsonProperty("class")
+    @JsonProperty("starship_class")
     private String starshipClass;
 
     private String model;
+
+    private String crew;
 }
