@@ -17,10 +17,23 @@ public class JediServiceImpl implements JediService {
 
     @Override
     public StarshipDto getDarthVaderStarship() {
-        StarshipProxyDto starshipProxyDto;
+        PersonProxyDto personProxyDto;
         try {
-            starshipProxyDto = cacheService.getStarshipProxyDtoByName(DARTH_VADER_PERSON_NAME);
+            personProxyDto = cacheService.getPersonProxyDtoByName(DARTH_VADER_PERSON_NAME);
         } catch (NoItemFoundException e) {
+            return null;
+        }
+
+        if (personProxyDto.getStarshipUrls().isEmpty()) {
+            return null;
+        }
+
+        String starshipUrl = personProxyDto.getStarshipUrls().get(0);
+        String[] subUrls = starshipUrl.split("/", -1);
+        String id = subUrls[subUrls.length-2];
+
+        StarshipProxyDto starshipProxyDto = cacheService.getStarshipProxyDtoById(id);
+        if (starshipProxyDto == null) {
             return null;
         }
 
@@ -33,10 +46,10 @@ public class JediServiceImpl implements JediService {
     }
 
     @Override
-    public Number getCrewsOnDeathStar() {
+    public Long getCrewsOnDeathStar() {
         StarshipProxyDto starshipProxyDto;
         try {
-            starshipProxyDto = cacheService.getStarshipProxyDtoByName(DARTH_VADER_PERSON_NAME);
+            starshipProxyDto = cacheService.getStarshipProxyDtoByName(DEATH_STAR_STARSHIP_NAME);
         } catch (NoItemFoundException e) {
             return null;
         }
@@ -59,6 +72,8 @@ public class JediServiceImpl implements JediService {
             String id = subUrls[subUrls.length-2];
 
             PersonProxyDto personProxyDto = cacheService.getPersonProxyDtoById(id);
+            if (personProxyDto == null) return null;
+
             if (personProxyDto.getName().equals(LEIA_ORGANA_PERSON_NAME)) {
                 leiaOnPlanet = true;
                 break;
@@ -70,7 +85,15 @@ public class JediServiceImpl implements JediService {
 
     @Override
     public InformationDto getInformation() {
-        return null;
-    }
+        StarshipDto starshipDto = getDarthVaderStarship();
+        Long crews = getCrewsOnDeathStar();
+        Boolean leiaOnAlderaan = isLeiaOnAlderaan();
 
+        InformationDto informationDto = new InformationDto();
+        informationDto.setStarship(starshipDto);
+        informationDto.setCrew(crews);
+        informationDto.setIsLeiaOnPlanet(leiaOnAlderaan);
+
+        return informationDto;
+    }
 }

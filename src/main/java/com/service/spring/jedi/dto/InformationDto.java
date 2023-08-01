@@ -11,7 +11,7 @@ public class InformationDto {
 
     private StarshipDto starship;
 
-    private int crew;
+    private Number crew;
 
-    private boolean isLeiaOnPlanet;
+    private Boolean isLeiaOnPlanet;
 }

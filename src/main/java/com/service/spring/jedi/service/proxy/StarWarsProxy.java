@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * @author vyshor
  */
-@FeignClient(url = "https://swapi.dev/api/", decode404 = true)
+@FeignClient(name = "swapi", url = "https://swapi.dev/api/", decode404 = true)
 public interface StarWarsProxy {
 
     @RequestMapping(value = "/starships", method = RequestMethod.GET)
