@@ -2,9 +2,7 @@ package com.service.spring.jedi.response;
 
 import lombok.Getter;
 
-/**
- * @author vyshor
- */
+
 public class SearchResponseBody<T> {
 
     private final int count;

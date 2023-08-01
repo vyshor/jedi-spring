@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author vyshor
- */
+
 @FeignClient(name = "swapi", url = "https://swapi.dev/api/", decode404 = true)
 public interface StarWarsProxy {
 

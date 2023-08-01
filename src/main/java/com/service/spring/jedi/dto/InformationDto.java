@@ -1,9 +1,7 @@
 package com.service.spring.jedi.dto;
 
 import lombok.*;
-/**
- * @author  vyshor
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
