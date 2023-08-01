@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  data:
+    web:
+      pageable:
+        size-parameter: size
+        page-parameter: page
+        default-page-size: 20
+        one-indexed-parameters: false
+        max-page-size: 2000
+        qualifier-delimiter: _
+      sort:
+        sort-parameter: sort
