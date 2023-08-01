@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author vyshor
  */
-@FeignClient(name = "swapi.dev/api/")
+@FeignClient(url = "https://swapi.dev/api/", decode404 = true)
 public interface StarWarsProxy {
 
     @RequestMapping(value = "/starships", method = RequestMethod.GET)
@@ -28,8 +29,8 @@ public interface StarWarsProxy {
     SearchResponseBody<List<PersonProxyDto>> getPersonProxyDtosByName(@RequestParam("search") String name);
 
     @RequestMapping(value = "/people/{id}", method = RequestMethod.GET)
-    PersonProxyDto getPersonProxyDtoById(@PathVariable("id") String id);
+    Optional<PersonProxyDto> getPersonProxyDtoById(@PathVariable("id") String id);
 
     @RequestMapping(value = "/starships/{id}", method = RequestMethod.GET)
-    StarshipProxyDto getStarshipProxyDtoById(@PathVariable("id") String id);
+    Optional<StarshipProxyDto> getStarshipProxyDtoById(@PathVariable("id") String id);
 }
